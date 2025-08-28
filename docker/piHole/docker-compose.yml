@@ -1,7 +1,7 @@
 # More info at https://github.com/pi-hole/docker-pi-hole/ and https://docs.pi-hole.net/
 services:
   pihole:
-    container_name: pihole-new
+    container_name: pihole
     hostname: pihole
     image: pihole/pihole:latest
     networks:
