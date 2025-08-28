@@ -6,8 +6,8 @@ services:
     image: pihole/pihole:latest
     networks:
       Server:
-        IPV4_ADDRESS: ${IPV4_ADDRESS}
-        MAC_ADDRESS: ${MAC_ADDRESS}
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
     ports:
       # DNS Ports
       - "53:53/tcp"
@@ -24,10 +24,10 @@ services:
       # Set the appropriate timezone for your location (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones), e.g:
       TZ: ${TZ}
       # Set a password to access the web interface. Not setting one will result in a random password being assigned
-      FTLCONF_WEBSERVER_API_PASSWORD: ${WEBSERVER_API_PASSWORD}
+      FTLCONF_webserver_api_password: ${WEBSERVER_API_PASSWORD}
       # If using Docker's default `bridge` network setting the dns listening mode should be set to 'all'
-      FTLCONF_DNS_LISTENINGMODE: 'ALL'
-      FTLCONF_DNS_UPSTREAMS: ${DNS_UPSTREAMS}
+      FTLCONF_dns_listeningmode: 'ALL'
+      FTLCONF_dns_upstreams: ${DNS_UPSTREAMS}
     # Volumes store your data between container upgrades
     volumes:
       # For persisting Pi-hole's databases and common configuration file
@@ -49,5 +49,3 @@ networks:
   Server:
     external:
       name: Server
-env_file:
-  - stack.env
