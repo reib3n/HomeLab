@@ -1,17 +1,17 @@
 ---
-   services:
-    heimdall:
-      image: lscr.io/linuxserver/heimdall:latest
-      container_name: heimdall
-      environment:
-        - PUID=1000
-        - PGID=1000
-        - TZ='Europe/Berlin'
-      volumes:
-        - config:'/config'
-      ports:
-        - 80:80
-      restart: unless-stopped
-      volumes:
-        config:
-          external: true
+services:
+  heimdall:
+    image: lscr.io/linuxserver/heimdall:latest
+    container_name: heimdall
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ='Europe/Berlin'
+    volumes:
+      - config:'/config'
+    ports:
+      - 80:80
+    restart: unless-stopped
+volumes:
+  config:
+    external: true
