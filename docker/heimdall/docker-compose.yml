@@ -12,3 +12,6 @@
       ports:
         - 80:80
       restart: unless-stopped
+      volumes:
+        config:
+          external: true
