@@ -1,10 +1,10 @@
 version: "3"
 services:
-  portainer_ce:
-    container_name: portainer_ce
+  portainer:
+    container_name: portainer
     image: portainer/portainer-ce:latest
     ports:
-      - 9444:9444
+      - 9443:9443
     volumes:
       - data:/data
       - /var/run/docker.sock:/var/run/docker.sock
