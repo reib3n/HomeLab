@@ -1,6 +1,7 @@
 version: "3"
 services:
-  portainer:
+  portainer_ce:
+    container_name: portainer_ce
     image: portainer/portainer-ce:latest
     ports:
       - 9443:9443
