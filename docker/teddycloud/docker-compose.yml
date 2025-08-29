@@ -1,0 +1,36 @@
+services:
+  teddycloud:
+    container_name: ${CONTAINER_NAME}
+    networks:
+      Server:
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
+    hostname: ${HOSTNAME}
+    image: ghcr.io/toniebox-reverse-engineering/teddycloud:latest_debian
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
+    ports:
+      - 80:80 #optional (for the webinterface)
+      - 8443:8443 #optional (for the webinterface)
+      - 443:443 #Port is needed for the connection for the box, must not be changed!
+    volumes:
+      - certs:/teddycloud/certs #certificates of the server
+      - config:/teddycloud/config #config file for the server and the boxes
+      - content:/teddycloud/data/content #microSD representation for the boxes
+      - library:/teddycloud/data/library #library to manage content
+      - custom_img:/teddycloud/data/www/custom_img #location to store custom images for custom tonies json
+      - firmware:/teddycloud/data/firmware #firmware backups
+      - cache:/teddycloud/data/cache #img cache for content images
+    restart: unless-stopped
+volumes:
+  certs:
+  config:
+  content:
+  library:
+  custom_img:
+  firmware:
+  cache:
+networks:
+  Server:
+    external:
+      name: Server
