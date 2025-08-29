@@ -16,5 +16,4 @@ This repository contains resources, scripts, and documentation for building and 
     ```bash
     git clone https://github.com/yourusername/HomeLab.git
     ```
-2. Review the documentation in the `docs/` folder.
-3. Run setup scripts as needed.
+2. Run setup scripts as needed.
