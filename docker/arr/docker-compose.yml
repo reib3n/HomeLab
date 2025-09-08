@@ -54,9 +54,8 @@ services:
       - PEERPORT=51413
     volumes:
       - transmission_config:/config
-      - arr_downloads:/downloads        # fertig heruntergeladene Dateien
-      - arr_incomplete:/incomplete      # unvollständige Downloads
-      - arr_watch:/watch                # *.torrent auto-import
+      - arr_downloads:/downloads      # <— EIN Volume, enthält complete+incomplete
+      - arr_watch:/watch
     restart: unless-stopped
 
 #   sonarr:
@@ -121,7 +120,6 @@ volumes:
 
   # Download-Volumes (lokal)
   arr_downloads:
-  arr_incomplete:
   arr_watch:
 
   # Fertige Medien: existierendes Volume wiederverwenden
