@@ -16,6 +16,9 @@ services:
       - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
       - SERVER_COUNTRIES=${SERVER_COUNTRIES}
       - TZ=${TZ}
+      - OPENVPN_CERT=/gluetun/client.crt
+      - OPENVPN_KEY=/gluetun/client.key
+      - OPENVPN_CA=/gluetun/ca.crt
       - UPDATER_PERIOD=${UPDATER_PERIOD}
       - HEALTH_SERVER_ADDRESS=${GLUETUN_HEALTH_ENDPOINT}
     volumes:
