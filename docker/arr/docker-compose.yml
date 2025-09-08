@@ -122,6 +122,7 @@ volumes:
   # Download-Volumes (lokal)
   arr_downloads:
   arr_incomplete:
+  arr_watch:
 
   # Fertige Medien: existierendes Volume wiederverwenden
   arr_media:
