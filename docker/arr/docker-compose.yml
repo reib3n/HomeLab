@@ -1,0 +1,127 @@
+version: "3.9"
+
+services:
+  gluetun:
+    image: qmcgaw/gluetun:latest
+    container_name: gluetun
+    cap_add:
+      - NET_ADMIN
+    devices:
+      - /dev/net/tun:/dev/net/tun
+    env_file: .env
+    environment:
+      - VPN_SERVICE_PROVIDER=${VPN_SERVICE_PROVIDER}
+      - VPN_TYPE=${VPN_TYPE}
+      - OPENVPN_USER=${OPENVPN_USER}
+      - OPENVPN_PASSWORD=${OPENVPN_PASSWORD}
+      - SERVER_COUNTRIES=${SERVER_COUNTRIES}
+      - TZ=${TZ}
+      - UPDATER_PERIOD=${UPDATER_PERIOD}
+      - HEALTH_SERVER_ADDRESS=${GLUETUN_HEALTH_ENDPOINT}
+    volumes:
+      - gluetun_config:/gluetun
+    ports:
+      # Transmission (Web + Peers)
+      - 9091:9091/tcp
+      - 51413:51413/tcp
+      - 51413:51413/udp
+      # *Arr Web-UIs
+      - 8989:8989/tcp   # Sonarr
+      - 7878:7878/tcp   # Radarr
+      - 9696:9696/tcp   # Prowlarr
+    healthcheck:
+      test: ["CMD", "wget", "-qO", "-", "http://${GLUETUN_HEALTH_ENDPOINT}/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - USER=${TRANSMISSION_USER}
+      - PASS=${TRANSMISSION_PASS}
+      - PEERPORT=51413
+    volumes:
+      - transmission_config:/config
+      - arr_downloads:/downloads
+      - arr_incomplete:/incomplete
+    restart: unless-stopped
+
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - sonarr_config:/config
+      - arr_downloads:/data/downloads
+      - arr_media:/data/media
+    restart: unless-stopped
+
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - radarr_config:/config
+      - arr_downloads:/data/downloads
+      - arr_media:/data/media
+    restart: unless-stopped
+
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - prowlarr_config:/config
+    restart: unless-stopped
+
+volumes:
+  # Config-Volumes (lokal)
+  gluetun_config:
+  transmission_config:
+  sonarr_config:
+  radarr_config:
+  prowlarr_config:
+
+  # Download-Volumes (lokal)
+  arr_downloads:
+  arr_incomplete:
+
+  # Fertige Medien: existierendes Volume wiederverwenden
+  arr_media:
+    external: true
+    name: arr_media
