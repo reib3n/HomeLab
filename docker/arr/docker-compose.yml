@@ -39,26 +39,26 @@ services:
       retries: 10
     restart: unless-stopped
 
-#   transmission:
-#     image: lscr.io/linuxserver/transmission:latest
-#     container_name: transmission
-#     network_mode: "service:gluetun"
-#     depends_on:
-#       gluetun:
-#         condition: service_healthy
-#     env_file: .env
-#     environment:
-#       - PUID=1000
-#       - PGID=1000
-#       - TZ=${TZ}
-#       - USER=${TRANSMISSION_USER}
-#       - PASS=${TRANSMISSION_PASS}
-#       - PEERPORT=51413
-#     volumes:
-#       - transmission_config:/config
-#       - arr_downloads:/downloads
-#       - arr_incomplete:/incomplete
-#     restart: unless-stopped
+  transmission:
+    image: lscr.io/linuxserver/transmission:latest
+    container_name: transmission
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+      - USER=${TRANSMISSION_USER}
+      - PASS=${TRANSMISSION_PASS}
+      - PEERPORT=51413
+    volumes:
+      - transmission_config:/config
+      - arr_downloads:/downloads
+      - arr_incomplete:/incomplete
+    restart: unless-stopped
 
 #   sonarr:
 #     image: lscr.io/linuxserver/sonarr:latest
