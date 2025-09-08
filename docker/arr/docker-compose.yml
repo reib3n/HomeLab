@@ -54,61 +54,61 @@ services:
       - PEERPORT=51413
     volumes:
       - transmission_config:/config
-      - arr_downloads:/downloads      # <— EIN Volume, enthält complete+incomplete
+      - arr_downloads:/downloads
       - arr_watch:/watch
     restart: unless-stopped
 
-#   sonarr:
-#     image: lscr.io/linuxserver/sonarr:latest
-#     container_name: sonarr
-#     network_mode: "service:gluetun"
-#     depends_on:
-#       gluetun:
-#         condition: service_healthy
-#     env_file: .env
-#     environment:
-#       - PUID=1000
-#       - PGID=1000
-#       - TZ=${TZ}
-#     volumes:
-#       - sonarr_config:/config
-#       - arr_downloads:/data/downloads
-#       - arr_media:/data/media
-#     restart: unless-stopped
+  sonarr:
+    image: lscr.io/linuxserver/sonarr:latest
+    container_name: sonarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - sonarr_config:/config
+      - arr_downloads:/data/downloads
+      - arr_media:/data/media
+    restart: unless-stopped
 
-#   radarr:
-#     image: lscr.io/linuxserver/radarr:latest
-#     container_name: radarr
-#     network_mode: "service:gluetun"
-#     depends_on:
-#       gluetun:
-#         condition: service_healthy
-#     env_file: .env
-#     environment:
-#       - PUID=1000
-#       - PGID=1000
-#       - TZ=${TZ}
-#     volumes:
-#       - radarr_config:/config
-#       - arr_downloads:/data/downloads
-#       - arr_media:/data/media
-#     restart: unless-stopped
+  radarr:
+    image: lscr.io/linuxserver/radarr:latest
+    container_name: radarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - radarr_config:/config
+      - arr_downloads:/data/downloads
+      - arr_media:/data/media
+    restart: unless-stopped
 
-#   prowlarr:
-#     image: lscr.io/linuxserver/prowlarr:latest
-#     container_name: prowlarr
-#     network_mode: "service:gluetun"
-#     depends_on:
-#       gluetun:
-#         condition: service_healthy
-#     env_file: .env
-#     environment:
-#       - PUID=1000
-#       - PGID=1000
-#       - TZ=${TZ}
-#     volumes:
-#       - prowlarr_config:/config
-#     restart: unless-stopped
+  prowlarr:
+    image: lscr.io/linuxserver/prowlarr:latest
+    container_name: prowlarr
+    network_mode: "service:gluetun"
+    depends_on:
+      gluetun:
+        condition: service_healthy
+    env_file: .env
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=${TZ}
+    volumes:
+      - prowlarr_config:/config
+    restart: unless-stopped
 
 volumes:
   # Config-Volumes (lokal)
