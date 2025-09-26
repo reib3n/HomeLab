@@ -1,0 +1,45 @@
+version: "3.9"
+
+services:
+  gitea:
+    image: gitea/gitea:latest-rootless # Multi-Arch (ARM/RPi geeignet)
+    container_name: gitea
+    restart: unless-stopped
+    # Auf dem Pi meist UID/GID 1000 der Standarduser
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+      - TZ=Europe/Berlin
+      # --- Basis-Server-Setup (später in der Web-UI anpassbar) ---
+      # Passe die folgenden Werte an deine Domain/URL an, falls Reverse-Proxy:
+      - GITEA__server__DOMAIN=localhost
+      - GITEA__server__ROOT_URL=http://localhost:3000/
+      - GITEA__server__SSH_DOMAIN=localhost
+      - GITEA__server__SSH_PORT=2222
+      # Registrierung optional gleich deaktivieren:
+      - GITEA__service__DISABLE_REGISTRATION=true
+      # --- Datenbank: SQLite (Standard, keine Extra-ENV nötig) ---
+      # Für SQLite NICHTS setzen – Gitea nutzt /var/lib/gitea/gitea.db
+    ports:
+      - "3000:3000"   # HTTP UI
+      - "2222:2222"   # Git per SSH (rootless-Image nutzt intern 2222)
+    volumes:
+      # Persistente Daten (Repos, Benutzer, SQLite-DB, Anhänge, Logs):
+      - ./gitea:/var/lib/gitea
+      # Optional: Konfiguration separat versionieren/anpassen (app.ini):
+      - ./gitea-config:/etc/gitea
+      # Zeit/Locale sauber durchreichen:
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+
+    # Tipp: Falls du Traefik o.ä. nutzt, kannst du hier Labels ergänzen.
+    # labels:
+    #   - "traefik.enable=true"
+    #   - "traefik.http.routers.gitea.rule=Host(`git.deinedomain.tld`)"
+    #   - "traefik.http.routers.gitea.entrypoints=websecure"
+    #   - "traefik.http.routers.gitea.tls.certresolver=letsencrypt"
+    #   - "traefik.http.services.gitea.loadbalancer.server.port=3000"
+
+# networks:
+#   default:
+#     name: gitea-net
