@@ -2,7 +2,7 @@ version: "3.9"
 
 services:
   gitea:
-    image: gitea/gitea:latest-rootless # Multi-Arch (ARM/RPi geeignet)
+    image: gitea/gitea:latest # Multi-Arch (ARM/RPi geeignet)
     container_name: gitea
     restart: unless-stopped
     # Auf dem Pi meist UID/GID 1000 der Standarduser
