@@ -7,8 +7,6 @@ services:
     restart: unless-stopped
     # Auf dem Pi meist UID/GID 1000 der Standarduser
     environment:
-      - USER_UID=1000
-      - USER_GID=1000
       - TZ=Europe/Berlin
       # --- Basis-Server-Setup (später in der Web-UI anpassbar) ---
       # Passe die folgenden Werte an deine Domain/URL an, falls Reverse-Proxy:
@@ -28,18 +26,3 @@ services:
       - ./gitea:/var/lib/gitea
       # Optional: Konfiguration separat versionieren/anpassen (app.ini):
       - ./gitea-config:/etc/gitea
-      # Zeit/Locale sauber durchreichen:
-      - /etc/timezone:/etc/timezone:ro
-      - /etc/localtime:/etc/localtime:ro
-
-    # Tipp: Falls du Traefik o.ä. nutzt, kannst du hier Labels ergänzen.
-    # labels:
-    #   - "traefik.enable=true"
-    #   - "traefik.http.routers.gitea.rule=Host(`git.deinedomain.tld`)"
-    #   - "traefik.http.routers.gitea.entrypoints=websecure"
-    #   - "traefik.http.routers.gitea.tls.certresolver=letsencrypt"
-    #   - "traefik.http.services.gitea.loadbalancer.server.port=3000"
-
-# networks:
-#   default:
-#     name: gitea-net
