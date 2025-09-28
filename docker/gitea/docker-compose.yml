@@ -23,14 +23,10 @@ services:
       - "80:80"   # HTTP UI
       - "22:22"   # Git per SSH
     volumes:
-      - gitea-data:/var/lib/gitea          # Datenbank, Repos, Anhänge
-      - gitea-config:/etc/gitea            # App-Config (app.ini usw.)
-      - gitea-log:/var/log/gitea           # Logs
+      - gitea-data:/data
 networks:
   Server:
     external:
       name: Server
 volumes:
   gitea-data:
-  gitea-config:
-  gitea-log:
