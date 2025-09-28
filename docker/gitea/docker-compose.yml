@@ -2,27 +2,29 @@ version: "3.9"
 
 services:
   gitea:
-    image: gitea/gitea:latest # Multi-Arch (ARM/RPi geeignet)
+    image: gitea/gitea:latest
     container_name: gitea
     restart: unless-stopped
-    # Auf dem Pi meist UID/GID 1000 der Standarduser
+    networks:
+      Server:
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
+    labels:
+      - "com.centurylinklabs.watchtower.enable=false"
     environment:
       - TZ=Europe/Berlin
-      # --- Basis-Server-Setup (später in der Web-UI anpassbar) ---
-      # Passe die folgenden Werte an deine Domain/URL an, falls Reverse-Proxy:
-      - GITEA__server__DOMAIN=localhost
-      - GITEA__server__ROOT_URL=http://localhost:3000/
-      - GITEA__server__SSH_DOMAIN=localhost
-      - GITEA__server__SSH_PORT=2222
-      # Registrierung optional gleich deaktivieren:
-      - GITEA__service__DISABLE_REGISTRATION=true
-      # --- Datenbank: SQLite (Standard, keine Extra-ENV nötig) ---
-      # Für SQLite NICHTS setzen – Gitea nutzt /var/lib/gitea/gitea.db
+      # Passe ROOT_URL auf die macvlan-IP an:
+      - GITEA__server__ROOT_URL=http://${HOSTNAME}:80/
+      - GITEA__server__SSH_DOMAIN=${HOSTNAME}
+      - GITEA__server__DOMAIN=${HOSTNAME}
+      - GITEA__server__SSH_PORT=22
     ports:
-      - "3000:3000"   # HTTP UI
-      - "2222:2222"   # Git per SSH (rootless-Image nutzt intern 2222)
+      - "80:80"   # HTTP UI
+      - "22:22"   # Git per SSH
     volumes:
-      # Persistente Daten (Repos, Benutzer, SQLite-DB, Anhänge, Logs):
       - ./gitea:/var/lib/gitea
-      # Optional: Konfiguration separat versionieren/anpassen (app.ini):
       - ./gitea-config:/etc/gitea
+networks:
+  Server:
+    external:
+      name: Server
