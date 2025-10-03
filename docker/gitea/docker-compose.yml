@@ -21,7 +21,7 @@ services:
       - GITEA__server__DOMAIN=${HOSTNAME}
       - GITEA__server__SSH_PORT=22
     ports:
-      - "80:80"   # HTTP UI
+      - "3000:80"   # HTTP UI
       - "22:22"   # Git per SSH
     volumes:
       - gitea-data:/data
