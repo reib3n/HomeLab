@@ -17,6 +17,7 @@ services:
       # Passe ROOT_URL auf die macvlan-IP an:
       - GITEA__server__ROOT_URL=http://${HOSTNAME}:80/
       - GITEA__server__HTTP_PORT=80
+      - GITEA__server__REDIRECT_OTHER_PORT=false   # <— wichtig
       - GITEA__server__SSH_DOMAIN=${HOSTNAME}
       - GITEA__server__DOMAIN=${HOSTNAME}
       - GITEA__server__SSH_PORT=22
