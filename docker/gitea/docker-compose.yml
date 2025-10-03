@@ -22,7 +22,6 @@ services:
       - GITEA__server__SSH_PORT=22
     ports:
       - "3000:80"   # HTTP UI
-      - "22:22"   # Git per SSH
     volumes:
       - gitea-data:/data
 networks:
