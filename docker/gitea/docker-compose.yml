@@ -9,6 +9,7 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
+      intra: {}
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     environment:
@@ -28,5 +29,7 @@ networks:
   Server:
     external:
       name: Server
+  intra:
+    driver: bridge
 volumes:
   gitea-data:
