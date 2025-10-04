@@ -3,6 +3,8 @@ services:
   portainer:
     container_name: portainer
     image: portainer/portainer-ce:latest
+    networks:
+      - intra
     ports:
       - 9443:9443
     volumes:
@@ -11,3 +13,6 @@ services:
     restart: unless-stopped
 volumes:
   data:
+networks:
+  intra:
+    external: true
