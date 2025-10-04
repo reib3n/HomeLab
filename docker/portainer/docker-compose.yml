@@ -3,7 +3,7 @@ services:
     container_name: portainer
     image: portainer/portainer-ce:latest
     networks:
-      - intra
+      - internal
     ports:
       - 9443:9443
     volumes:
@@ -13,5 +13,5 @@ services:
 volumes:
   data:
 networks:
-  intra:
-    driver: bridge
+  internal:
+    external: true
