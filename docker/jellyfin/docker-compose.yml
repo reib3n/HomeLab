@@ -11,6 +11,7 @@ services:
       - TZ=Europe/Berlin
     networks:
       Server:
+        ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
 
 volumes:
