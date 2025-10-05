@@ -1,0 +1,31 @@
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    restart: unless-stopped
+    ports:
+      - 8096:8096           # HTTP-Zugriff (optional: 8920 für HTTPS)
+    volumes:
+      - jellyfin_config:/config
+      - jellyfin_cache:/cache
+      - arr_media:/media:ro  # Pfad zu deiner Medienbibliothek (anpassen)
+    environment:
+      - TZ=Europe/Berlin
+    networks:
+      Server:
+#        ipv4_address: ${IPV4_ADDRESS}
+#        mac_address: ${MAC_ADDRESS}
+
+volumes:
+  jellyfin_config:
+  jellyfin_cache:
+
+  arr_media:
+    external: true
+    name: arr_media
+
+networks:
+  Server:
+    external:
+      name: Server
+
