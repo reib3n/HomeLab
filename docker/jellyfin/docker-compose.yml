@@ -6,7 +6,7 @@ services:
     volumes:
       - jellyfin_config:/config
       - jellyfin_cache:/cache
-      - arr_media:/media:ro  # Pfad zu deiner Medienbibliothek (anpassen)
+      - arr_media:/media:rw  # Pfad zu deiner Medienbibliothek (anpassen)
     environment:
       - TZ=Europe/Berlin
     networks:
