@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  ddns-updater:
+    image: qmcgaw/ddns-updater:latest
+    container_name: ddns-updater
+    restart: unless-stopped
+    network_mode: bridge
+    environment:
+      - TZ=Europe/Berlin
+    volumes:
+      - ./ddns:/updater/data
+    ports:
+      - 8000:8000
