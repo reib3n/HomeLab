@@ -12,14 +12,14 @@ services:
       - "443:443"
     volumes:
       - ./Caddyfile:/etc/caddy/Caddyfile
-      - caddy_data:/data
-      - caddy_config:/config
+      - data:/data
+      - config:/config
     environment:
       - TZ=Europe/Berlin
 
 volumes:
-  caddy_data:
-  caddy_config:
+  data:
+  config:
 
 networks:
   DMZ-WAN:
