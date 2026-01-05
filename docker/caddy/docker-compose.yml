@@ -11,7 +11,7 @@ services:
       - "80:80"
       - "8443:443"
     volumes:
-      - ./Caddyfile:/data/Caddyfile
+      - ./Caddyfile:/data/Caddyfile.caddy:ro
       - data:/data
       - config:/config
     environment:
