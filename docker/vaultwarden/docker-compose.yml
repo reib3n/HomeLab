@@ -8,8 +8,6 @@ services:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
     restart: unless-stopped
-    ports:
-     - 9445:80 #map any custom port to use (replace 9445 not 80)
     volumes:
      - bitwarden:/data:rw
     environment:
