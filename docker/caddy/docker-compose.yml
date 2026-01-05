@@ -11,9 +11,9 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Caddyfile:/dataCaddyfile
-      - data:/data
-      - config:/config
+      - ./Caddyfile:/data/Caddyfile
+      - caddy_data:/data
+      - caddyconfig:/config
     environment:
       - TZ=Europe/Berlin
 
