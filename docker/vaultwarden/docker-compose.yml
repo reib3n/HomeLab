@@ -11,8 +11,8 @@ services:
     volumes:
      - bitwarden:/data:rw
     environment:
-     - ROCKET_TLS={certs="/data/ssl/certs.pem",key="/data/ssl/key.pem"} 
-     - ROCKET_PORT=443
+#     - ROCKET_TLS={certs="/data/ssl/certs.pem",key="/data/ssl/key.pem"} 
+     - ROCKET_PORT=80
      - ADMIN_TOKEN=${ADMIN_TOKEN}
      - WEBSOCKET_ENABLED=true
      - SIGNUPS_ALLOWED=true
