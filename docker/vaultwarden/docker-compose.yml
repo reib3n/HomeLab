@@ -11,10 +11,10 @@ services:
     volumes:
      - bitwarden:/data:rw
     environment:
-#     - ROCKET_TLS={certs="/ssl/certs/certs.pem",key="/ssl/private/key.pem"}  // Environment variable is specific to the Rocket web server
+     - ROCKET_TLS={certs="/ssl/certs/certs.pem",key="/ssl/private/key.pem"} 
      - ADMIN_TOKEN=${ADMIN_TOKEN}
      - WEBSOCKET_ENABLED=true
-     - SIGNUPS_ALLOWED=true ##change to false once create the admin account
+     - SIGNUPS_ALLOWED=true
      - DOMAIN=${DOMAIN}
 volumes:
   bitwarden:
