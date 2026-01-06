@@ -5,11 +5,11 @@ services:
     image: caddy:latest
     container_name: caddy
     restart: unless-stopped
+    network_mode: bridge
     networks:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
-      bridge: {}
     ports:
       - "80:80"
       - "443:443"
@@ -28,5 +28,3 @@ networks:
   Server:
     external:
       name: Server
-  bridge:
-    external: true
