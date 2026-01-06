@@ -19,7 +19,6 @@ services:
      - DOMAIN=${DOMAIN}
 volumes:
   bitwarden:
-#networks:
-#  Server:
-#    external:
-#      name: Server
+networks:
+  internal:
+    external: true
