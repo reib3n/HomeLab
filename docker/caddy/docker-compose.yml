@@ -6,7 +6,9 @@ services:
     container_name: caddy
     restart: unless-stopped
     networks:
-      - DMZ-WAN
+      Server:
+        ipv4_address: ${IPV4_ADDRESS}
+        mac_address: ${MAC_ADDRESS}
     ports:
       - "80:80"
       - "443:443"
@@ -22,5 +24,6 @@ volumes:
   config:
 
 networks:
-  Server
-    external: true
+  Server:
+    external:
+      name: Server
