@@ -4,7 +4,7 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     networks:
-      DMZ-TO-INT: {}
+      ProxyCon: {}
     restart: unless-stopped
     volumes:
      - bitwarden:/data:rw
@@ -18,5 +18,5 @@ services:
 volumes:
   bitwarden:
 networks:
-  DMZ-TO-INT:
+  ProxyCon:
     external: true
