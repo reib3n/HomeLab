@@ -5,7 +5,6 @@ services:
     image: caddy:latest
     container_name: caddy
     restart: unless-stopped
-    network_mode: bridge
     networks:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
