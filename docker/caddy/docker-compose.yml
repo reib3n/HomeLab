@@ -9,7 +9,9 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
-      bridge: {}
+      bridge:  # Verwendet das standardmäßige Docker-Bridge-Netzwerk
+        external: true
+        name: bridge
     ports:
       - "80:80"
       - "443:443"
@@ -28,5 +30,3 @@ networks:
   Server:
     external:
       name: Server
-  bridge:
-    driver: bridge
