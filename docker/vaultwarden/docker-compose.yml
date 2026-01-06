@@ -3,10 +3,8 @@ services:
   vaultwarden:
     image: vaultwarden/server:latest
     container_name: vaultwarden
-#    networks:
-#      Server:
-#        ipv4_address: ${IPV4_ADDRESS}
-#        mac_address: ${MAC_ADDRESS}
+    networks:
+      internal: {}
     restart: unless-stopped
     volumes:
      - bitwarden:/data:rw
