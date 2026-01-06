@@ -5,8 +5,7 @@ services:
     image: qmcgaw/ddns-updater:latest
     container_name: ddns-updater
     restart: unless-stopped
-    networks:
-      internal: {}
+    network_mode: bridge
     environment:
       - TZ=Europe/Berlin
     volumes:
@@ -15,6 +14,3 @@ services:
       - 8000:8000
 volumes:
   ddns:
-networks:
-  internal:
-    external: true
