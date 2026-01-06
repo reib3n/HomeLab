@@ -4,9 +4,9 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     networks:
-      Server:
-        ipv4_address: ${IPV4_ADDRESS}
-        mac_address: ${MAC_ADDRESS}
+#      Server:
+#        ipv4_address: ${IPV4_ADDRESS}
+#        mac_address: ${MAC_ADDRESS}
     restart: unless-stopped
     volumes:
      - bitwarden:/data:rw
@@ -19,7 +19,7 @@ services:
      - DOMAIN=${DOMAIN}
 volumes:
   bitwarden:
-networks:
-  Server:
-    external:
-      name: Server
+#networks:
+#  Server:
+#    external:
+#      name: Server
