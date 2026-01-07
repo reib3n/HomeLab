@@ -5,6 +5,7 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
+      internal: {}
     hostname: ${HOSTNAME}
     image: ghcr.io/toniebox-reverse-engineering/teddycloud:latest_debian
     labels:
@@ -34,3 +35,6 @@ networks:
   Server:
     external:
       name: Server
+  internal:
+    external:
+      name: internal
