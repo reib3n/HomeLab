@@ -8,6 +8,7 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
+      internal: {}
     ports:
       # DNS Ports
       - "53:53/tcp"
@@ -49,3 +50,6 @@ networks:
   Server:
     external:
       name: Server
+  internal:
+    external:
+      name: internal
