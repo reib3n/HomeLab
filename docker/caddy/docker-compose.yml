@@ -6,14 +6,9 @@ services:
     container_name: caddy
     restart: unless-stopped
     networks:
-      ProxyCon:
-        ipv4_address: 192.168.90.3
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
-    cap_add:
-      - NET_ADMIN
-    command: ["sh", "-c", "ip route add default via 192.168.20.1 dev eth0 && exec caddy run"]
     ports:
       - "80:80"
       - "443:443"
@@ -29,7 +24,5 @@ volumes:
   config:
 
 networks:
-  ProxyCon:
-    external: true
   Server:
     external: true
