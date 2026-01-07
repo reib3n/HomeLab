@@ -12,9 +12,9 @@ services:
     security_opt:
       - apparmor:unconfined
     volumes:
-      - netdataconfig:/etc/netdata
-      - netdatalib:/var/lib/netdata
-      - netdatacache:/var/cache/netdata
+      - netdata_config:/etc/netdata
+      - netdata_lib:/var/lib/netdata
+      - netdata_cache:/var/cache/netdata
       - /etc/passwd:/etc/passwd:ro
       - /etc/group:/etc/group:ro
       - /proc:/host/proc:ro
@@ -30,6 +30,6 @@ services:
       - NETDATA_CLAIM_ROOMS=  # Optional: Für Cloud-Integration
 
 volumes:
-  netdataconfig:
-  netdatalib:
-  netdatacache:
+  netdata_config:
+  netdata_lib:
+  netdata_cache:
