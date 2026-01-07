@@ -4,7 +4,8 @@ services:
     image: vaultwarden/server:latest
     container_name: vaultwarden
     networks:
-      ProxyCon: {}
+      ProxyCon:
+        ipv4_address: 192.168.90.10
     restart: unless-stopped
     volumes:
      - bitwarden:/data:rw

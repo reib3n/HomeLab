@@ -9,7 +9,8 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
-      ProxyCon: {}
+      ProxyCon:
+        ipv4_address: 192.168.90.3
     ports:
       - "80:80"
       - "443:443"
