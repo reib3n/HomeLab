@@ -2,7 +2,7 @@ version: '3'
 services:
   watchtower:
     container_name: watchtower
-    image: percona/watchtower:latest
+    image: nickfedor/watchtower:latest
     command:
       - --cleanup=true
     restart: always
