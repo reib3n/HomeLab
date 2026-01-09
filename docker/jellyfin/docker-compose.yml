@@ -13,6 +13,7 @@ services:
       Server:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
+      internal: {}
 
 volumes:
   jellyfin_config:
@@ -26,4 +27,7 @@ networks:
   Server:
     external:
       name: Server
+  internal:
+    external:
+      name: internal
 
