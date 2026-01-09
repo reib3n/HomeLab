@@ -10,6 +10,7 @@ services:
         ipv4_address: ${IPV4_ADDRESS}
         mac_address: ${MAC_ADDRESS}
       internal: {}
+      arr_internal: {}
     ports:
       - "80:80"
       - "443:443"
@@ -30,3 +31,6 @@ networks:
       name: Server
   internal:
     external: true
+  arr_internal:
+    external:
+      name: arr_internal
