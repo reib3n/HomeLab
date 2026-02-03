@@ -8,9 +8,8 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - nextcloud_data:/var/www/html
-      - apps:/var/www/html/custom_apps
-      - config:/var/www/html/config
+      - html:/var/www/html       # Systemdateien (Apps, Config)
+      - nextcloud_data:/var/www/html/data  # NUTZERDATEN (separates Volume!)
     environment:
       - MYSQL_HOST=nextcloud_db
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -38,8 +37,7 @@ services:
 volumes:
   nextcloud_data:
     external: true
-  apps:
-  config:
+  html:
   db_data:
 
 networks:
