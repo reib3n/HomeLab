@@ -8,6 +8,7 @@ services:
     networks:
       internal: {}
     environment:
+      - LOG_LEVEL=debug
       - TZ=Europe/Berlin
     volumes:
       - ddns:/updater/data
