@@ -4,28 +4,22 @@ services:
     container_name: gitea
     restart: unless-stopped
     networks:
-      Server:
-        ipv4_address: ${IPV4_ADDRESS}
-        mac_address: ${MAC_ADDRESS}
       internal: {}
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     environment:
       - TZ=Europe/Berlin
-      - GITEA__server__ROOT_URL=http://${HOSTNAME}:80/
+      - GITEA__server__ROOT_URL=http://${HOSTNAME}:443/
       - GITEA__server__HTTP_PORT=80
       - GITEA__server__REDIRECT_OTHER_PORT=false   # ← verhindert 302 auf :80
       - GITEA__server__SSH_DOMAIN=${HOSTNAME}
       - GITEA__server__DOMAIN=${HOSTNAME}
-      - GITEA__server__SSH_PORT=22
+      - GITEA__server__SSH_PORT=30022
     expose:
-      - "80"
+      - "30080"
     volumes:
       - gitea-data:/data
 networks:
-  Server:
-    external:
-      name: Server
   internal:
     external: true
 volumes:
