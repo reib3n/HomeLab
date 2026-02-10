@@ -3,8 +3,6 @@ services:
     image: gitea/gitea:latest
     container_name: gitea
     restart: unless-stopped
-    networks:
-      internal: {}
     labels:
       - "com.centurylinklabs.watchtower.enable=false"
     environment:
@@ -19,8 +17,5 @@ services:
       - "30080"
     volumes:
       - gitea-data:/data
-networks:
-  internal:
-    external: true
 volumes:
   gitea-data:
