@@ -8,10 +8,7 @@ services:
     environment:
       - TZ=Europe/Berlin
       - GITEA__server__ROOT_URL=http://192.168.20.11:30080/
-      - GITEA__server__HTTP_PORT=80
-      - GITEA__server__REDIRECT_OTHER_PORT=false   # ← verhindert 302 auf :80
-      - GITEA__server__SSH_DOMAIN=${HOSTNAME}
-      - GITEA__server__DOMAIN=${HOSTNAME}
+      - GITEA__server__HTTP_PORT=30080
       - GITEA__server__SSH_PORT=30022
     expose:
       - "30080"
